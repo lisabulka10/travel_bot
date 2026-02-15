@@ -7,6 +7,9 @@ class Activity(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = 'Вид отдыха'
         verbose_name_plural = 'Виды отдыха'
@@ -27,6 +30,9 @@ class UserProfile(TimeStampMixin):
         blank=True
     )
 
+    def __str__(self):
+        return self.user
+
     # visa
     class Meta:
         verbose_name = 'Профиль'
@@ -43,3 +49,7 @@ class ProfileActivity(models.Model):
         on_delete=models.CASCADE
     )
     priority = models.PositiveSmallIntegerField(default=1)
+
+    class Meta:
+        ordering = ('priority',)
+

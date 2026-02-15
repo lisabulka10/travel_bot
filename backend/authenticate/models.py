@@ -1,8 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin
+)
 
 
 class UserManager(BaseUserManager):
+    def get_by_natural_key(self, tg_id):
+        return self.get(tg_id=tg_id)
+
     def create_user(self, tg_id, **extra_fields):
         if not tg_id:
             raise ValueError('Telegram ID id required')
@@ -10,10 +17,13 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    # createsuperuser
+    def create_superuser(self, tg_id, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(tg_id=tg_id, password=password, **extra_fields)
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
     tg_id = models.PositiveBigIntegerField(
         verbose_name='Telegram ID',
         blank=True,
@@ -51,7 +61,7 @@ class User(AbstractUser):
         default=False
     )
 
-    objects = UserManager
+    objects = UserManager()
 
     USERNAME_FIELD = 'tg_id'
     REQUIRED_FIELDS = []
