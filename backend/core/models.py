@@ -7,3 +7,4 @@ class TimeStampMixin(models.Model):
 
     class Meta:
         abstract = True
+

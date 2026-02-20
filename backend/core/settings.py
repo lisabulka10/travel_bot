@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authenticate',
-    'profiles'
+    'profiles',
+    'countries',
 ]
 
 MIDDLEWARE = [
