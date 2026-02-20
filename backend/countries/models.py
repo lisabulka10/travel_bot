@@ -1,5 +1,7 @@
 from django.db import models
 
+from core.models import TimeStampMixin
+
 
 class VisaType(models.Model):
     name = models.CharField(max_length=100)
@@ -13,7 +15,7 @@ class VisaType(models.Model):
         verbose_name_plural = 'Типы визы'
 
 
-class Country(models.Model):
+class Country(TimeStampMixin):
     name = models.CharField(max_length=255)
     code = models.PositiveIntegerField()
     budget = models.PositiveIntegerField()
