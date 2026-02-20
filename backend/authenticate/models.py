@@ -10,10 +10,11 @@ class UserManager(BaseUserManager):
     def get_by_natural_key(self, tg_id):
         return self.get(tg_id=tg_id)
 
-    def create_user(self, tg_id, **extra_fields):
+    def create_user(self, tg_id, password,  **extra_fields):
         if not tg_id:
             raise ValueError('Telegram ID id required')
         user = self.model(tg_id=tg_id, **extra_fields)
+        user.set_password(password)
         user.save(using=self._db)
         return user
 

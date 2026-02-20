@@ -34,7 +34,7 @@ BASE_API_V1_PREFIX = 'api/v1'
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path(f'{BASE_API_V1_PREFIX}/', include("authenticate.urls")),
+    path(f'{BASE_API_V1_PREFIX}/authenticate/', include("authenticate.urls")),
     #path(f'{BASE_API_V1_PREFIX}/', include("crmlite.urls")),
 
     path(f'{BASE_API_V1_PREFIX}/schema/', SpectacularAPIView.as_view(), name='schema'),

@@ -21,13 +21,14 @@ class UserProfile(TimeStampMixin):
         on_delete=models.CASCADE,
         related_name='profiles'
     )
-    budget_min = models.PositiveIntegerField()
-    budget_max = models.PositiveIntegerField(null=True)
+    budget_min = models.PositiveIntegerField(blank=True, null=True)
+    budget_max = models.PositiveIntegerField(blank=True, null=True)
     activities = models.ManyToManyField(
         Activity,
         through='ProfileActivity',
         related_name='profiles',
-        blank=True
+        blank=True,
+        null=True
     )
     visa = models.ManyToManyField(
         'countries.VisaType',
