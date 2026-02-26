@@ -1,5 +1,7 @@
-.env/
+.venv/
 .idea/
+.env
+venv/
 
 
 **cache**
